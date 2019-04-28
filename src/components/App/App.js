@@ -1,40 +1,25 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Authentication from '../../util/Authentication/Authentication'
 
 import './App.css'
 
-export default class App extends React.Component{
-    constructor(props){
-        super(props)
-        this.Authentication = new Authentication()
+class App extends Component {
 
-        //if the extension is running on twitch or dev rig, set the shorthand here. otherwise, set to null. 
-        this.twitch = window.Twitch ? window.Twitch.ext : null
-        this.state={
-            finishedLoading:false,
-            theme:'light',
-            isVisible:true
-        }
+
+    meep = () => {
+        return "Hehe";
     }
 
-    contextUpdate(context, delta){
-        if(delta.includes('theme')){
-            this.setState(()=>{
-                return {theme:context.theme}
-            })
-        }
+    state = {
+        finishedLoading: false,
+        theme: 'light',
+        isVisible: true
     }
 
-    visibilityChanged(isVisible){
-        this.setState(()=>{
-            return {
-                isVisible
-            }
-        })
-    }
-
+    Authentication = new Authentication()
+    twitch = window.Twitch ? window.Twitch.ext : null
+    
     componentDidMount(){
-        window.Twitch.ext.rig.log('Did mounts')
         if(this.twitch){
             this.twitch.onAuthorized((auth)=>{
                 this.Authentication.setToken(auth.token, auth.userId)
@@ -71,7 +56,23 @@ export default class App extends React.Component{
             this.twitch.unlisten('broadcast', ()=>console.log('successfully unlistened'))
         }
     }
-    
+
+    contextUpdate(context, delta){
+        if(delta.includes('theme')){
+            this.setState(()=>{
+                return {theme:context.theme}
+            })
+        }
+    }
+
+    visibilityChanged(isVisible){
+        this.setState(()=>{
+            return {
+                isVisible
+            }
+        })
+    }
+
     render(){
         if(this.state.finishedLoading && this.state.isVisible){
             return (
@@ -94,3 +95,5 @@ export default class App extends React.Component{
 
     }
 }
+
+export default App;
