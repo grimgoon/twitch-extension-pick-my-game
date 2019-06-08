@@ -1,11 +1,37 @@
 .App {
     font-family: Arial, Helvetica, sans-serif;
+    height: 496px;
+    width: 318px;
+    font-size: 16px;
 }
 
-.App-light{
-    color:#232127;
+.header, .content {
+    padding: 10px;
+    background-color: #f4f4fb;
 }
 
-.App-dark{
-    color:#e5e3e8;
+/* Header */
+.header--title,.header--description {
+    text-align: center;
 }
+
+.header--title {
+    font-size: 24px;
+    margin-bottom: 4px;
+    color: #6441a4;
+    font-weight: 800;
+
+}
+
+.header--description {
+    font-size: 18px;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 12px;
+}
+
+.header--time {
+    font-size: 18px;
+    text-align: center;   
+}
+
